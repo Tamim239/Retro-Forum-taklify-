@@ -6,18 +6,21 @@ const loaderApiSearch = async(category , isShowAll) =>{
     allPostDataHandle(allPost)
 }
 
-
 const handleSearchBtn = (isShowAll) =>{
     handleSpinner(true)
     const searchField = document.getElementById("search-field");
     const searchValue = searchField.value;
     // console.log(searchValue)
-    loaderApiSearch(searchValue, isShowAll)
+    const timeOut = setTimeout(() =>{
+        loaderApiSearch(searchValue, isShowAll)
+        clearTimeout(timeOut);
+    }, 2000)
 }
 
 
 let isActive = ''
 const allPostDataHandle = (details) => {
+    
     const discussContainer = document.getElementById("discuss-container");
     discussContainer.textContent = '';
     details.forEach(data => {
@@ -70,10 +73,7 @@ const allPostDataHandle = (details) => {
         `
         discussContainer.appendChild(div)
     }); 
-    const timeOut = setTimeout(() =>{
-        handleSpinner(false)
-        clearTimeout(timeOut);
-    }, 2000);
+    handleSpinner(false)
 }
 // spinner loader
 const handleSpinner = (isSpinner) =>{
@@ -109,15 +109,14 @@ const markBtn = (title, view) => {
 
 }
 
-// allPostApi()
-loaderApiSearch("")
 
+loaderApiSearch("")
 
 
 const handleLatestApi = async() => {
     const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/latest-posts`)
     const data = await res.json()
-    console.log(data)
+    // console.log(data)
     handleLatestShow(data)
 }
 
@@ -125,7 +124,7 @@ const handleLatestShow = (data) =>{
     // console.log(data)
     const latestContainer = document.getElementById("latest-container");
     data.forEach(detail =>{
-        console.log(detail)
+        // console.log(detail)
         const div = document.createElement("div");
         div.classList = "card card-compact bg-base-100 border p-6"
         div.innerHTML = `
