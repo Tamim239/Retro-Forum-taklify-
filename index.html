@@ -37,22 +37,38 @@
                         </div>
                         <div
                             class="menu menu-sm dropdown-content mt-3 z-[1] p-5 shadow bg-base-100 rounded-box w-auto text-xl">
-                            <a title="Home" href=""><i class="ri-home-line"></i></a>
-                            <a title="edit" href=""><i class="ri-pencil-line"></i></a>
-                            <a title="add" href=""><i class="ri-user-add-line"></i></a>
-                            <a title="flag" href=""><i class="ri-flag-line"></i></a>
+                            <div class="tooltip" data-tip="Home">
+                                <a href=""><i class="ri-home-line"></i></a>
+                            </div>
+                            <div class="tooltip" data-tip="edit">
+                                <a href=""><i class="ri-pencil-line"></i></a>
+                            </div>
+                            <div class="tooltip" data-tip="add">
+                                <a href=""><i class="ri-user-add-line"></i></a>
+                            </div>
+                            <div class="tooltip" data-tip="flag">
+                                <a href=""><i class="ri-flag-line"></i></a>
+                            </div>
                         </div>
                     </div>
                     <img src="images/logo.png" alt="">
                 </div>
                 <div class="navbar-end space-x-4 text-xl">
                     <div class=" hidden md:flex space-x-4 *:p-2 *:bg-[#12132D08] *:rounded-full">
-                        <a title="Home" href=""><i class="ri-home-line"></i></a>
-                        <a title="edit" href=""><i class="ri-pencil-line"></i></a>
-                        <a title="add" href=""><i class="ri-user-add-line"></i></a>
-                        <a title="flag" href=""><i class="ri-flag-line"></i></a>
+                        <div class="tooltip" data-tip="Home">
+                            <a href=""><i class="ri-home-line"></i></a>
+                        </div>
+                        <div class="tooltip" data-tip="edit">
+                            <a href=""><i class="ri-pencil-line"></i></a>
+                        </div>
+                        <div class="tooltip" data-tip="add">
+                            <a href=""><i class="ri-user-add-line"></i></a>
+                        </div>
+                        <div class="tooltip" data-tip="flag">
+                            <a href=""><i class="ri-flag-line"></i></a>
+                        </div>
                     </div>
-                    <a class="btn rounded-full px-6 bg-[#797DFC] text-white text-xl font-bold border-0">Sign In</a>
+                    <a class="btn rounded-full md:px-5 bg-[#797DFC] text-white text-xl font-bold border-0">Sign In</a>
                 </div>
             </div>
         </div>
@@ -68,9 +84,9 @@
                     <br> forum coffee mug!
                 </p>
                 <div class="flex items-center">
-                    <input type="text" placeholder="Type here"
+                    <input id="search-field" type="text" placeholder="Type here"
                         class="input input-bordered rounded-full w-full max-w-xs" />
-                    <button
+                    <button onclick="handleSearchBtn(true)"
                         class="btn rounded-full px-6 bg-[#797DFC] text-white text-base font-bold border-0 md:-ml-24 -ml-20">Search</button>
                 </div>
             </div>
@@ -104,49 +120,14 @@
         </section>
         <!-- card all -->
         <section class="md:w-4/5 md:mx-auto mx-4 my-10 py-5 md:py-10">
+
+            <div id="handleSpinner" class="hidden text-center">
+                <span class="loading loading-bars loading-lg"></span>
+            </div>
+            <!-- card -->
             <div class="flex flex-col-reverse md:flex-row gap-6">
-                <div class="card bg-[#F3F3F5] shadow-xl p-5 md:p-10 rounded-3xl space-y-3">
-                    <div>
-                        <!-- card left -->
-                        <div class="flex flex-col md:flex-row items-center gap-4">
-                            <div class="indicator">
-                                <span class="indicator-item badge badge-success"></span>
-                                <img src="" alt="pic" class="grid w-20 h-20 bg-base-300 place-items-center rounded-3xl">
-                            </div>
-                            <div class=" space-y-3">
-                                <div class="flex items-center gap-5 text-sm font-medium">
-                                    <h1># Music</h1>
-                                    <h2>Author : Awlad Hossain</h2>
-                                </div>
-                                <h1 class="text-xl font-bold">10 Kids Unaware of Their Halloween Costume</h1>
-                            </div>
-                        </div>
-                        <div class=" md:pl-24 ">
-                            <p class="border-b border-dashed border-black pb-5">It's one thing to subject yourself to ha
-                                Halloween costume mishap because, hey that's your prerogative</p>
-                            <div class=" flex justify-between md:items-center pt-2">
-                                <div class=" flex gap-6 *:flex *:gap-3 *:text-base">
-                                    <div>
-                                        <i class="ri-message-2-line text-xl"></i>
-                                        <p>560</p>
-                                    </div>
-                                    <div>
-                                        <i class="ri-eye-line text-xl"></i>
-                                        <p>560</p>
-                                    </div>
-                                    <div>
-                                        <i class="ri-time-line text-xl"></i>
-                                        <p>560</p>
-                                    </div>
-                                </div>
-                                <button
-                                    class="btn mt-7 -ml-7 md:mt-0 md:ml-0 bg-[#10B981] rounded-full text-white text-xl"><i
-                                        class="ri-mail-check-line"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="">
-                    </div>
+                <!-- card left -->
+                <div id="discuss-container">
                 </div>
                 <!-- right side -->
                 <div class="">
@@ -156,16 +137,12 @@
                             <div class="flex items-center space-x-3">
                                 <img src="images/Frame.svg" alt="svg">
                                 <!-- dynamic -->
-                                <h1>Mark as read (<span>0</span>)</h1>
+                                <h1>Mark as read (<span id="count">0</span>)</h1>
                             </div>
                         </div>
                         <!-- dynamic -->
-                        <div class="flex justify-between items-center bg-[#ffffff99] p-4 rounded-3xl">
-                            <h1 class="font-semibold">10 Kids Unaware of Their Halloween Costume</h1>
-                            <div class="flex items-center gap-3">
-                                <i class="ri-eye-line text-xl"></i>
-                                <p>560</p>
-                            </div>
+                        <div id="discuss-output-container"
+                            class="flex flex-col justify-between items-center gap-3 p-4 rounded-3xl">
                         </div>
                     </div>
                 </div>
@@ -199,7 +176,7 @@
                     features allow for a streamlined .</p>
             </div>
             <!-- card all -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg::grid-cols-3 gap-6 mt-10">
+            <div id="latest-container" class="grid grid-cols-1 md:grid-cols-2 lg::grid-cols-3 gap-6 mt-10">
                 <div class="card card-compact bg-base-100 border p-6">
                     <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
                             alt="Shoes" /></figure>
@@ -226,7 +203,8 @@
     <footer class=" bg-gradient-to-r from-[#12132D00] to-[#12132D0D] text-center p-10  rounded">
         <div class="space-y-3">
             <h1 class="text-4xl font-black">ReTro</h1>
-            <p class=" md:w-1/2 mx-auto">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical
+            <p class=" md:w-1/2 mx-auto">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots
+                in a piece of classical
                 Latin literature from 45 BC</p>
         </div>
         <div class="py-3">
@@ -237,7 +215,8 @@
                 <a><i class="ri-github-fill"></i></a>
             </div>
         </div>
-        <hr> <hr>
+        <hr>
+        <hr>
         <aside class="p-3">
             <p>Copyright © 2024 - All Right Reserved</p>
         </aside>
